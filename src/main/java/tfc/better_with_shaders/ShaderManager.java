@@ -5,14 +5,16 @@ import net.minecraft.client.GLAllocation;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.render.Framebuffer;
 import net.minecraft.client.render.OpenGLHelper;
-import net.minecraft.client.render.Renderer;
 import net.minecraft.client.render.Texture;
 import net.minecraft.client.render.shader.Shader;
 import net.minecraft.client.render.shader.Shaders;
-import net.minecraft.client.render.texturepack.TexturePackBase;
+import net.minecraft.client.render.texturepack.TexturePack;
 import net.minecraft.client.render.texturepack.TexturePackList;
 import net.minecraft.core.util.phys.Vec3d;
-import org.lwjgl.opengl.*;
+import org.lwjgl.opengl.ARBFramebufferObject;
+import org.lwjgl.opengl.ARBMultitexture;
+import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.GL20;
 import tfc.better_with_shaders.feature.ShaderCapabilities;
 import tfc.better_with_shaders.preprocessor.ConfigProcessor;
 import tfc.better_with_shaders.preprocessor.IncludeProcessor;
@@ -104,8 +106,8 @@ public class ShaderManager {
         return is;
     }
 
-    TexturePackBase base;
-    TexturePackBase def;
+    TexturePack base;
+    TexturePack def;
 
     protected String read(String string, String name) {
         String ext = ".fsh";

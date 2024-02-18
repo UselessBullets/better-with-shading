@@ -1,9 +1,7 @@
 package tfc.better_with_shaders.gui.button;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiSlider;
-import net.minecraft.client.option.FloatOption;
 
 public class SliderButton extends GuiSlider implements IOptionButton {
     String name;
@@ -27,9 +25,9 @@ public class SliderButton extends GuiSlider implements IOptionButton {
     }
 
     @Override
-    public boolean mousePressed(Minecraft minecraft, int i, int j) {
+    public boolean mouseClicked(Minecraft minecraft, int i, int j) {
         float ov = sliderValue;
-        boolean rv = super.mousePressed(minecraft, i, j);
+        boolean rv = super.mouseClicked(minecraft, i, j);
         if (sliderValue != ov) {
             option.value = sliderValue;
             option.onUpdate(this);
@@ -48,7 +46,7 @@ public class SliderButton extends GuiSlider implements IOptionButton {
     }
 
     @Override
-    protected void mouseDragged(Minecraft minecraft, int i, int j) {
+    public void mouseDragged(Minecraft minecraft, int i, int j) {
         float ov = sliderValue;
         super.mouseDragged(minecraft, i, j);
         if (sliderValue != ov) {

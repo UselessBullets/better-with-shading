@@ -4,7 +4,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.render.FontRenderer;
 import net.minecraft.client.render.Tessellator;
-import net.minecraft.client.render.texturepack.TexturePackBase;
 import org.lwjgl.opengl.GL11;
 
 public class GuiShaderButton extends GuiButton {
@@ -24,15 +23,15 @@ public class GuiShaderButton extends GuiButton {
             GL11.glDisable(3553);
             tessellator.startDrawingQuads();
             tessellator.setColorOpaque_I(2139127936);
-            tessellator.addVertexWithUV((double) (this.xPosition - 2), (double) (this.yPosition + this.height + 2), 0.0, 0.0, 1.0);
-            tessellator.addVertexWithUV((double) (this.xPosition + this.width + 2), (double) (this.yPosition + this.height + 2), 0.0, 1.0, 1.0);
-            tessellator.addVertexWithUV((double) (this.xPosition + this.width + 2), (double) (this.yPosition - 2), 0.0, 1.0, 1.0);
-            tessellator.addVertexWithUV((double) (this.xPosition - 2), (double) (this.yPosition - 2), 0.0, 0.0, 0.0);
+            tessellator.addVertexWithUV(this.xPosition - 2, this.yPosition + this.height + 2, 0.0, 0.0, 1.0);
+            tessellator.addVertexWithUV(this.xPosition + this.width + 2, this.yPosition + this.height + 2, 0.0, 1.0, 1.0);
+            tessellator.addVertexWithUV(this.xPosition + this.width + 2, this.yPosition - 2, 0.0, 1.0, 1.0);
+            tessellator.addVertexWithUV(this.xPosition - 2, this.yPosition - 2, 0.0, 0.0, 0.0);
             tessellator.setColorOpaque_I(0);
-            tessellator.addVertexWithUV((double) (this.xPosition - 1), (double) (this.yPosition + this.height + 1), 0.0, 0.0, 1.0);
-            tessellator.addVertexWithUV((double) (this.xPosition + this.width + 1), (double) (this.yPosition + this.height + 1), 0.0, 1.0, 1.0);
-            tessellator.addVertexWithUV((double) (this.xPosition + this.width + 1), (double) (this.yPosition - 1), 0.0, 1.0, 1.0);
-            tessellator.addVertexWithUV((double) (this.xPosition - 1), (double) (this.yPosition - 1), 0.0, 0.0, 0.0);
+            tessellator.addVertexWithUV(this.xPosition - 1, this.yPosition + this.height + 1, 0.0, 0.0, 1.0);
+            tessellator.addVertexWithUV(this.xPosition + this.width + 1, this.yPosition + this.height + 1, 0.0, 1.0, 1.0);
+            tessellator.addVertexWithUV(this.xPosition + this.width + 1, this.yPosition - 1, 0.0, 1.0, 1.0);
+            tessellator.addVertexWithUV(this.xPosition - 1, this.yPosition - 1, 0.0, 0.0, 0.0);
             tessellator.draw();
             GL11.glEnable(3553);
         }

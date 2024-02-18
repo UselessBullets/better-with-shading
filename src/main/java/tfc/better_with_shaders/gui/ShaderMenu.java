@@ -4,31 +4,24 @@ import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
-import net.minecraft.client.gui.options.GuiButtonTexturePack;
-import net.minecraft.client.gui.options.GuiOptionsPageBase;
 import net.minecraft.client.option.GameSettings;
-import net.minecraft.client.render.texturepack.TexturePackBase;
 import net.minecraft.core.lang.I18n;
-import net.minecraft.core.util.helper.Color;
 import net.minecraft.core.util.helper.Utils;
 import tfc.better_with_shaders.ShaderManager;
 
 import java.io.File;
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ShaderMenu extends GuiOptionsPageBase {
+public class ShaderMenu extends GuiScreen {
     GuiButton btnOpenFolder = null, btnConfigure = null;
     String[] shaderPackList = new File(shaderPackDir).list((fl, n) -> new File(fl + "/" + n).isDirectory());
 
-    public ShaderMenu(GuiScreen parent, GameSettings settings) {
-        super(parent, settings);
+    public ShaderMenu(GuiScreen parent) {
+        super(parent);
 
         String[] ishaderPackList = new String[shaderPackList.length + 2];
-        for (int i = 0; i < shaderPackList.length; i++) {
-            ishaderPackList[i + 2] = shaderPackList[i];
-        }
+        System.arraycopy(shaderPackList, 0, ishaderPackList, 2, shaderPackList.length);
         ishaderPackList[0] = "Off";
         ishaderPackList[1] = "Internal";
         shaderPackList = ishaderPackList;
@@ -42,21 +35,21 @@ public class ShaderMenu extends GuiOptionsPageBase {
     int tbottom;
 
     @Override
-    public void initGui() {
+    public void init() {
         this.controlList.clear();
         this.texturePackButtons.clear();
-        super.initGui();
+        super.init();
 
-        try {
-            Field f = GuiOptionsPageBase.class.getDeclaredField("top");
-            f.setAccessible(true);
-            ttop = f.getInt(this);
-            f = GuiOptionsPageBase.class.getDeclaredField("bottom");
-            f.setAccessible(true);
-            tbottom = f.getInt(this);
-        } catch (Throwable err) {
-            throw new RuntimeException(err);
-        }
+//        try {
+//            Field f = GuiOptionsPageBase.class.getDeclaredField("top");
+//            f.setAccessible(true);
+//            ttop = f.getInt(this);
+//            f = GuiOptionsPageBase.class.getDeclaredField("bottom");
+//            f.setAccessible(true);
+//            tbottom = f.getInt(this);
+//        } catch (Throwable err) {
+//            throw new RuntimeException(err);
+//        }
 
         for (int i = 0; i < shaderPackList.length; ++i) {
             String tp = shaderPackList[i];
@@ -75,14 +68,11 @@ public class ShaderMenu extends GuiOptionsPageBase {
 
     int mouseX, mouseY;
 
-    public void drawScreen(int x, int y, float renderPartialTicks) {
-        super.drawScreen(x, y, renderPartialTicks);
-        this.mouseX = x;
-        this.mouseY = y;
-    }
-
-    @Override
-    protected void drawPageItems(int x, int y, int width) {
+    public void drawScreen(int mouseX, int mouseY, float renderPartialTicks) {
+        drawDefaultBackground();
+        super.drawScreen(mouseX, mouseY, renderPartialTicks);
+        this.mouseX = mouseX;
+        this.mouseY = mouseY;
         if (btnOpenFolder == null) {
             Minecraft mc = Minecraft.getMinecraft(Minecraft.class);
             setWorldAndResolution(
@@ -91,6 +81,8 @@ public class ShaderMenu extends GuiOptionsPageBase {
             );
         }
 
+        int y = 20;
+        int x =  width/4;
         this.btnOpenFolder.yPosition = y + 4;
         int previousHeights = y + 4 + 20 + 6;
 
@@ -106,12 +98,6 @@ public class ShaderMenu extends GuiOptionsPageBase {
             previousHeights += button.height + 3;
         }
     }
-
-    @Override
-    protected int getTotalPageHeight() {
-        return 20;
-    }
-
     protected void buttonPressed(GuiButton guibutton) {
         super.buttonPressed(guibutton);
         if (guibutton == this.btnOpenFolder) {

@@ -9,7 +9,6 @@
     "MenuCloseRedirectionCodeMixin",
     "FramebufferMixin",
     "GamelRendererMixin",
-    "OptionsPageMixin",
     "ShadersRendererMixin",
     "TexturePackListMixin",
     "WorldRendererMixin"

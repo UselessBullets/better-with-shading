@@ -1,7 +1,7 @@
 package tfc.better_with_shaders.mixin;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.render.texturepack.TexturePackBase;
+import net.minecraft.client.render.texturepack.TexturePack;
 import net.minecraft.client.render.texturepack.TexturePackList;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -20,7 +20,7 @@ public class TexturePackListMixin {
 	}
 	
 	@Inject(at = @At("RETURN"), method = "setTexturePack")
-	public void postSet(TexturePackBase newPack, CallbackInfo ci) {
+	public void postSet(TexturePack newPack, CallbackInfo ci) {
 		ShaderManager.INSTANCE.useFirstShader((TexturePackList) (Object) this, Config.getShader());
 	}
 }

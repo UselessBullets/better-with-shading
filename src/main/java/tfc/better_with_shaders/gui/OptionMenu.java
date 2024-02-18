@@ -3,9 +3,6 @@ package tfc.better_with_shaders.gui;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
-import net.minecraft.client.option.FloatOption;
-import net.minecraft.client.option.GameSettings;
-import net.minecraft.core.util.helper.Color;
 import tfc.better_with_shaders.ShaderManager;
 import tfc.better_with_shaders.gui.button.IOptionButton;
 import tfc.better_with_shaders.gui.button.OptionButton;
@@ -25,9 +22,9 @@ public class OptionMenu extends GuiScreen {
     }
 
     @Override
-    public void initGui() {
+    public void init() {
         this.controlList.clear();
-        super.initGui();
+        super.init();
 
         int top = ((ShaderMenu) getParentScreen()).ttop + 10;
         int bottom = height - 34;
@@ -128,7 +125,7 @@ public class OptionMenu extends GuiScreen {
                 return;
             }
             cat = stack.pop();
-            initGui();
+            init();
             return;
         }
 
@@ -138,7 +135,7 @@ public class OptionMenu extends GuiScreen {
             if (value instanceof CFGCategory) {
                 stack.push(cat);
                 cat = (CFGCategory) value;
-                initGui();
+                init();
             } else if (value instanceof Boolean) {
                 cat.set(name, !((Boolean) value));
                 guibutton.displayString = name + " = " + !((Boolean) value);
